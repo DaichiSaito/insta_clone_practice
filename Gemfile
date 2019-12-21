@@ -48,6 +48,10 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'annotate'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
