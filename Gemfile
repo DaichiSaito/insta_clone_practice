@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'slim-rails'
 gem 'sorcery'
 gem 'redis-rails'
+gem 'rails-i18n', '~> 5.1'
