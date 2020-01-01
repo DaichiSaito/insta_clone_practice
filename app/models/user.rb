@@ -26,8 +26,30 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :post
 
   def own?(object)
     id == object.user_id
+  end
+
+  # インプット・・・投稿のインスンタス
+  # アウトプット・・・返り値はなし
+  def like(post)
+    # likes.create(post_id: post.id)
+    #
+    # Like.create(user_id: current_user.id, post_id: post.id)
+
+    like_posts << post
+  end
+
+  # インプット・・・投稿のインスンタス
+  # アウトプット・・・返り値はなし
+  def unlike(post)
+    like_posts.destroy(post)
+  end
+
+  def like?(post)
+    like_posts.include?(post)
   end
 end
