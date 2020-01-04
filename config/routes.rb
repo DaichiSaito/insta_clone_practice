@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   resources :posts, shallow: true do
     resources :comments
     resources :likes, only: %i[create destroy]
+    collection do
+      get :like_posts
+    end
   end
 end
