@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
-  resources :users
+  resources :users, only: %i[index new create show]
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
@@ -13,4 +13,5 @@ Rails.application.routes.draw do
       get :like_posts
     end
   end
+  resources :relationships, only: %i[create destroy]
 end
