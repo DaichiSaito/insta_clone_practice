@@ -23,6 +23,7 @@ class Post < ApplicationRecord
   serialize :images, JSON
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :images, presence: true
   validates :body, presence: true, length: { maximum: 1000 }
