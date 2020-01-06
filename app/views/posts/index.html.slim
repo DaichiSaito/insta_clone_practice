@@ -17,6 +17,6 @@
           .card-header
             | ユーザー
           .card-body
-            = render @users
+            = render User.recent(5)
           .card-footer
             = link_to 'すべて見る', users_path

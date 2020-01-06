@@ -2,20 +2,10 @@ class PostsController < ApplicationController
   before_action :require_login, only: %i[new create edit update destroy]
   def index
     @posts = if current_user
-               # current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
-               # Post.feed_of(current_user).includes(:user).page(params[:page]).order(created_at: :desc)
-               my_post = current_user.posts
-               following_user_posts = []
-               current_user.following.each do |user|
-                 following_user_posts.push(user.posts)
-               end
-
-               my_post + following_user_posts
+               current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
              else
                Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
              end
-
-    @users = User.recent(5)
   end
 
   def new
@@ -63,6 +53,11 @@ class PostsController < ApplicationController
   def like_posts
     @posts = current_user.like_posts.includes(:user).page(params[:page]).order(created_at: :desc).per(10)
     render :index
+  end
+
+  def search
+    @search_form = SearchPostsForm.new(params.require(:search).permit(:body))
+    @posts = @search_form.search.includes(:user).page(params[:page])
   end
 
   private
