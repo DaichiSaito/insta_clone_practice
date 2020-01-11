@@ -15,4 +15,8 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: %i[create destroy]
+
+  namespace :mypage do
+    resource :account, only: %i[edit update]
+  end
 end
